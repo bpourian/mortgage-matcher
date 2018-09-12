@@ -1,15 +1,11 @@
 package com.landbay.dao;
 
+
 import com.landbay.model.Loan;
 
 import java.util.List;
 
-/**
- * This class parses data from a loan CSV file
- */
-public class LoanCsvDao implements LoanDao {
+public interface LoanCsvDao {
 
-    public List<Loan> listLoan() {
-        return null;
-    }
+    List<Loan> listLoan();
 }

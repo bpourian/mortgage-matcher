@@ -1,6 +1,8 @@
 package com.landbay;
 
 import com.landbay.dao.InvestmentRequestCsvDao;
+import com.landbay.dao.LoanCsvDao;
+import com.landbay.dao.LoanCsvDaoImpl;
 
 import java.io.IOException;
 
@@ -13,8 +15,10 @@ public class Main
 {
     public static void main( String[] args ) throws IOException {
         InvestmentRequestCsvDao investmentRequestCsvDao = new InvestmentRequestCsvDao();
-
         investmentRequestCsvDao.listInvestmentRequests();
+
+        LoanCsvDao loanCsvDao = new LoanCsvDaoImpl();
+        loanCsvDao.listLoan();
 
     }
 

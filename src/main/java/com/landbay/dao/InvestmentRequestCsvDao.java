@@ -7,18 +7,18 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.GenericArrayType;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class InvestmentRequestCsvDao implements InvestmentRequestDao {
+public class InvestmentRequestCsvDao implements InvestmentRequestDao
+{
     private static final String CSV_FILE_PATH = "src/main/resources/data/investmentRequests.csv";
 
-    @Override
-    public List<InvestmentRequest> listInvestmentRequests() {
+    public List<InvestmentRequest> listInvestmentRequests()
+    {
         Reader reader;
         try {
             reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
@@ -42,12 +42,14 @@ public class InvestmentRequestCsvDao implements InvestmentRequestDao {
 
         List<InvestmentRequest> list = new ArrayList<>();
 
-        while (investmentRequestIterator.hasNext()) {
+        while (investmentRequestIterator.hasNext())
+        {
             InvestmentRequest investmentRequest = investmentRequestIterator.next();
             list.add(investmentRequest);
         }
 
-        for (InvestmentRequest ir : list) {
+        for (InvestmentRequest ir : list)
+        {
             System.out.println(ir.getProductType());
         }
 
