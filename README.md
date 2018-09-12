@@ -1,5 +1,17 @@
 # Mortgage Matcher
 
+## Design and Performance Decisions
+
+### Performance
+
+###### Opencsv library says: 
+
+- If memory is not a problem, read using CsvToBean.parse(), which will read all beans at once 
+and is multi-threaded. If your memory is limited, use CsvToBean.iterator() and iterate over the input. Only one bean 
+is read at a time, making multi-threading impossible and slowing down reading, but only one object is in memory at a
+time (assuming you process and release the object for the garbage collector immediately).
+
+
 ## Requirements
 
 Context
