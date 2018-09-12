@@ -7,6 +7,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.GenericArrayType;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,11 +27,12 @@ public class InvestmentRequestCsvDao implements InvestmentRequestDao {
         }
 
         ColumnPositionMappingStrategy<InvestmentRequest> strategy = new ColumnPositionMappingStrategy<>();
+
         strategy.setType(InvestmentRequest.class);
         String[] memberFieldsToBindTo = {"investor", "investmentAmount", "productType", "term"};
         strategy.setColumnMapping(memberFieldsToBindTo);
 
-        CsvToBean csvToBean = new CsvToBeanBuilder(reader)
+        CsvToBean<InvestmentRequest> csvToBean = new CsvToBeanBuilder<InvestmentRequest>(reader)
                 .withMappingStrategy(strategy)
                 .withSkipLines(1)
                 .withIgnoreLeadingWhiteSpace(true)
