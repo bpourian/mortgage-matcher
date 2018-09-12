@@ -2,7 +2,6 @@ package com.landbay;
 
 import com.landbay.dao.InvestmentRequestCsvDao;
 import com.landbay.dao.LoanCsvDao;
-import com.landbay.dao.LoanCsvDaoImpl;
 
 import java.io.IOException;
 
@@ -17,7 +16,7 @@ public class Main
         InvestmentRequestCsvDao investmentRequestCsvDao = new InvestmentRequestCsvDao();
         investmentRequestCsvDao.listInvestmentRequests();
 
-        LoanCsvDao loanCsvDao = new LoanCsvDaoImpl();
+        LoanCsvDao loanCsvDao = new LoanCsvDao();
         loanCsvDao.listLoan();
 
     }

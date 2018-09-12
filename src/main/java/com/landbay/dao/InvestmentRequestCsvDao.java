@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+/**
+ * This class implements InvestmentRequestDao interface
+ * and lists all investment requests from the csv file
+ */
 public class InvestmentRequestCsvDao implements InvestmentRequestDao
 {
     private static final String CSV_FILE_PATH = "src/main/resources/data/investmentRequests.csv";
@@ -26,13 +31,18 @@ public class InvestmentRequestCsvDao implements InvestmentRequestDao
             throw new RuntimeException();
         }
 
-        ColumnPositionMappingStrategy<InvestmentRequest> strategy = new ColumnPositionMappingStrategy<>();
+        // Using below strategy to decouple
+        // this library from the model and
+        // avoid using annotations
+        ColumnPositionMappingStrategy<InvestmentRequest> strategy;
+        strategy = new ColumnPositionMappingStrategy<>();
 
         strategy.setType(InvestmentRequest.class);
         String[] memberFieldsToBindTo = {"investor", "investmentAmount", "productType", "term"};
         strategy.setColumnMapping(memberFieldsToBindTo);
 
-        CsvToBean<InvestmentRequest> csvToBean = new CsvToBeanBuilder<InvestmentRequest>(reader)
+        CsvToBean<InvestmentRequest> csvToBean; // creating a bean collection with type InvestmentRequest
+        csvToBean = new CsvToBeanBuilder<InvestmentRequest>(reader)
                 .withMappingStrategy(strategy)
                 .withSkipLines(1)
                 .withIgnoreLeadingWhiteSpace(true)
