@@ -8,7 +8,7 @@ package com.landbay.model;
  *  - productType
  *  - term
  */
-public class InvRequest {
+public class InvestmentRequest {
 
     private String investor;
 
@@ -19,7 +19,7 @@ public class InvRequest {
     private String term;
 
 
-    // public getters and setters
+    // public getters
 
     public String getInvestor() { return investor; }
 
@@ -29,4 +29,21 @@ public class InvRequest {
 
     public String getTerm() { return term; }
 
+    // public setters
+
+    public void setInvestor(String investor) {
+        this.investor = investor;
+    }
+
+    public void setInvestmentAmount(String investmentAmount) {
+        this.investmentAmount = investmentAmount;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
 }

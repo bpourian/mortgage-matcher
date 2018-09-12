@@ -22,7 +22,7 @@ public class Loan {
     private String completedDate; // format DD/MM/YYYY
 
 
-    // public getters and setters
+    // public getters
 
     public int getLoanId() {
         return loanId;
@@ -42,5 +42,27 @@ public class Loan {
 
     public String getCompletedDate() {
         return completedDate;
+    }
+
+    // public setters
+
+    public void setLoanId(int loanId) {
+        this.loanId = loanId;
+    }
+
+    public void setLoandAmount(int loandAmount) {
+        this.loandAmount = loandAmount;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public void setTerm(int term) {
+        this.term = term;
+    }
+
+    public void setCompletedDate(String completedDate) {
+        this.completedDate = completedDate;
     }
 }

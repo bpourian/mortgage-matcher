@@ -6,21 +6,23 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 
-/**
- * Unit test for Loan class
- */
-public class LoanTest {
 
-    private Loan loan;
+/**
+ * Unit tests for InvRequest class
+ */
+public class InvestmentRequestTest {
+
+    private InvestmentRequest invRequest;
+
     @BeforeEach
     void init()
     {
-        loan = new Loan();
+        invRequest = new InvestmentRequest();
     }
 
     @Test
-    void LoanToBeDefined()
+    void InvRequestToBeDefined()
     {
-        assertThat(loan, instanceOf(Loan.class));
+        assertThat(invRequest, instanceOf(InvestmentRequest.class));
     }
 }
