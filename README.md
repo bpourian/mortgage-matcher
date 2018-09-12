@@ -2,6 +2,26 @@
 
 ## Design and Performance Decisions
 
+### Useful Articles and Reading
+
+###### Setter methods or constructors 
+
+• I found this stackoverflow [ARTICLE](https://stackoverflow.com/questions/19359548/setter-methods-or-constructors) interesting as I was not sure what are the advantages
+or using either a setter or a constructor. 
+
+• ```Private fields + Public accessors == Encapsulation;```
+
+• This can be used as a way of creating json object 
+
+```` 
+// instance method
+public String toString() { //overriding the toString() method 
+  return ("Customer name: " + getName() 
+  + ", SSN#: " + getSSN() ); // concatenating the name and SSN
+
+}
+ ````
+
 ### Performance
 
 ###### Opencsv library says: 

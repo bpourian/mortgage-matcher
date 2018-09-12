@@ -2,7 +2,7 @@ package com.landbay.model;
 
 /**
  * This class creates an investor object with
- * the following properties:
+ * the following instance variables:
  *  - investor
  *  - investmentAmount
  *  - productType
@@ -20,6 +20,7 @@ public class InvRequest {
 
 
     // public getters and setters
+
     public String getInvestor() { return investor; }
 
     public String getInvestmentAmount() { return investmentAmount; }
