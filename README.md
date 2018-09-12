@@ -33,8 +33,11 @@ penny on this amount with investor funds.
 #### Please write a program that will match the investments to the loans following the business rules listed below. 
 
 • The program should be written in Java. 
-• Once the program has run, the program must output the loans that are fully funded, 
+
+• Once the program has run, the program must output the loans that are fully funded
+
 • the names of the people funding the loans and the amount of money they have invested in the loan.
+
 
 ##### Business Rules
 • A valid "funded" loan must be fully funded from the investments.csv file. If a loan does not have all the funds 

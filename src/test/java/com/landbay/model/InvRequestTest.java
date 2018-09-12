@@ -25,4 +25,28 @@ public class InvRequestTest {
     {
         assertThat(invRequest, instanceOf(InvRequest.class));
     }
+
+    @Test
+    void InvRequestHasMethodgetInvestor()
+    {
+        assertThat(invRequest.getInvestor(), true);
+    }
+
+    @Test
+    void InvRequestHasMethodgetInvestmentAmount()
+    {
+        assertThat(invRequest.getInvestmentAmount(), true);
+    }
+
+    @Test
+    void InvRequestHasMethodgetProductType()
+    {
+        assertThat(invRequest.getProductType(), true);
+    }
+
+    @Test
+    void InvRequestHasMethodgetTerm()
+    {
+        assertThat(invRequest.getTerm(), true);
+    }
 }
