@@ -21,6 +21,17 @@ public String toString() { //overriding the toString() method
 
 }
  ````
+ 
+###### Gson 
+
+• [ARTICLE](http://www.vogella.com/tutorials/JavaLibrary-Gson/article.html) on using Gson for 
+creating json from Java objects
+
+###### CSV File Reader
+
+• [ARTICLE](https://www.callicoder.com/java-read-write-csv-file-opencsv/) on using csv file reader
+without the use of annotations
+
 
 ### Performance
 
