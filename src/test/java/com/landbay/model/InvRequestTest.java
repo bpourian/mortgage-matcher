@@ -20,6 +20,9 @@ public class InvRequestTest {
         invRequest = new InvRequest();
     }
 
+
+    // The method returns boolean true if
+    // the stack is empty else it returns false
     @Test
     void InvRequestToBeDefined()
     {
