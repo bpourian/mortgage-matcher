@@ -12,22 +12,32 @@ public class InvestmentRequest {
 
     private String investor;
 
-    private String investmentAmount;
+    private int investmentAmount;
 
     private String productType;
 
-    private String term;
+    private int term;
+
+    public  InvestmentRequest(){};
+
+    public InvestmentRequest(String investor, int investmentAmount, String productType, int term)
+    {
+        this.investor = investor;
+        this.investmentAmount = investmentAmount;
+        this.productType = productType;
+        this.term = term;
+    }
 
 
     // public getters
 
     public String getInvestor() { return investor; }
 
-    public String getInvestmentAmount() { return investmentAmount; }
+    public int getInvestmentAmount() { return investmentAmount; }
 
     public String getProductType() { return productType; }
 
-    public String getTerm() { return term; }
+    public int getTerm() { return term; }
 
     // public setters
 
@@ -35,7 +45,7 @@ public class InvestmentRequest {
         this.investor = investor;
     }
 
-    public void setInvestmentAmount(String investmentAmount) {
+    public void setInvestmentAmount(int investmentAmount) {
         this.investmentAmount = investmentAmount;
     }
 
@@ -43,7 +53,7 @@ public class InvestmentRequest {
         this.productType = productType;
     }
 
-    public void setTerm(String term) {
+    public void setTerm(int term) {
         this.term = term;
     }
 }

@@ -13,13 +13,24 @@ public class Loan {
 
     private int loanId;
 
-    private int loandAmount;
+    private int loanAmount;
 
     private String product; // i.e. Tracker or Fixed
 
     private int term;
 
     private String completedDate; // format DD/MM/YYYY
+
+    public Loan(){};
+
+    public Loan(int loanId, int loanAmount, String product, int term, String completedDate)
+    {
+        this.loanId = loanId;
+        this.loanAmount = loanAmount;
+        this.product = product;
+        this.term = term;
+        this.completedDate = completedDate;
+    }
 
 
     // public getters
@@ -29,7 +40,7 @@ public class Loan {
     }
 
     public int getLoandAmount() {
-        return loandAmount;
+        return loanAmount;
     }
 
     public String getProduct() {
@@ -51,7 +62,7 @@ public class Loan {
     }
 
     public void setLoandAmount(int loandAmount) {
-        this.loandAmount = loandAmount;
+        this.loanAmount = loandAmount;
     }
 
     public void setProduct(String product) {
