@@ -32,6 +32,10 @@ creating json from Java objects
 • [ARTICLE](https://www.callicoder.com/java-read-write-csv-file-opencsv/) on using csv file reader
 without the use of annotations
 
+###### Sort List Of Objects by Field
+
+• [ARTICLE](https://www.codebyamir.com/blog/sort-list-of-objects-by-field-java) which helped me simplify the process of sorting object by field
+
 
 ### Performance
 

@@ -1,7 +1,6 @@
 package com.landbay;
 
-import com.landbay.dao.InvestmentRequestCsvDao;
-import com.landbay.dao.LoanCsvDao;
+import com.landbay.rules.MatchRequestRulesImpl;
 
 import java.io.IOException;
 
@@ -13,11 +12,16 @@ import java.io.IOException;
 public class MortgageMatcher
 {
     public static void main( String[] args ) throws IOException {
-        InvestmentRequestCsvDao investmentRequestCsvDao = new InvestmentRequestCsvDao();
-        investmentRequestCsvDao.listInvestmentRequests();
+//        InvestmentRequestCsvDaoImpl investmentRequestCsvDaoImpl = new InvestmentRequestCsvDaoImpl();
+//        investmentRequestCsvDaoImpl.listInvestmentRequests();
+//
+//
+//        LoanCsvDaoImpl loanCsvDao = new LoanCsvDaoImpl();
+//        loanCsvDao.listLoan();
 
-        LoanCsvDao loanCsvDao = new LoanCsvDao();
-        loanCsvDao.listLoan();
+        MatchRequestRulesImpl matchRequestRules = new MatchRequestRulesImpl();
+        matchRequestRules.sortLoansByOldestFirst();
+
 
     }
 

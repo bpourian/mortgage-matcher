@@ -20,7 +20,7 @@ public class MatchRequestsTest
     }
 
     @Test
-    void InvestmentRequestToBeDefined()
+    void MatchRequestsToBeDefined()
     {
         assertThat(matchRequests, instanceOf(MatchRequests.class));
     }

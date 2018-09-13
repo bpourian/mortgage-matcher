@@ -18,9 +18,20 @@ import java.util.List;
  * This class implements InvestmentRequestDao interface
  * and lists all investment requests from the csv file
  */
-public class InvestmentRequestCsvDao implements InvestmentRequestDao
+public class InvestmentRequestCsvDaoImpl implements InvestmentRequestDao
 {
-    private static final String CSV_FILE_PATH = "src/main/resources/data/investmentRequests.csv";
+    private String CSV_FILE_PATH;
+
+    public InvestmentRequestCsvDaoImpl(String CSV_FILE_PATH)
+    {
+        this.CSV_FILE_PATH = CSV_FILE_PATH;
+    }
+
+    // default constructor
+    public InvestmentRequestCsvDaoImpl()
+    {
+        this("src/main/resources/data/investmentRequests.csv");
+    }
 
     public List<InvestmentRequest> listInvestmentRequests()
     {

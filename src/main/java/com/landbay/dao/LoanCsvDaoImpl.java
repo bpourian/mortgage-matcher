@@ -17,9 +17,20 @@ import java.util.List;
  * This class implements LoanDao interface
  * and lists all loan requests from the csv file
  */
-public class LoanCsvDao implements LoanDao
+public class LoanCsvDaoImpl implements LoanDao
 {
-    private static final String CSV_FILE_PATH = "src/main/resources/data/loans.csv";
+    private String CSV_FILE_PATH;
+
+    public LoanCsvDaoImpl(String CSV_FILE_PATH)
+    {
+        this.CSV_FILE_PATH = CSV_FILE_PATH;
+    }
+
+    // default constructor
+    public LoanCsvDaoImpl()
+    {
+        this("src/main/resources/data/loans.csv");
+    }
 
     public List<Loan> listLoan() {
         Reader reader;
@@ -55,10 +66,12 @@ public class LoanCsvDao implements LoanDao
             list.add(loan);
         }
 
-        for (Loan ln : list)
-        {
-            System.out.println(ln.getCompletedDate());
-        }
+//        System.out.println(list);
+//
+//        for (Loan ln : list)
+//        {
+//            System.out.println(ln.getCompletedDate());
+//        }
 
         return list;
 
