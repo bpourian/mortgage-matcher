@@ -10,7 +10,7 @@ import java.io.IOException;
  * output the list of loans that have been matched
  *
  */
-public class Main
+public class MortgageMatcher
 {
     public static void main( String[] args ) throws IOException {
         InvestmentRequestCsvDao investmentRequestCsvDao = new InvestmentRequestCsvDao();
