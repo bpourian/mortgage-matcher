@@ -7,4 +7,6 @@ import java.util.List;
 public interface MatchRequestRules {
 
     List<Loan> sortLoansByOldestFirst();
+
+    void sortProductTypesIntoLists();
 }

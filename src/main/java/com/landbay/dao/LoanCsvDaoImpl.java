@@ -66,14 +66,6 @@ public class LoanCsvDaoImpl implements LoanDao
             list.add(loan);
         }
 
-//        System.out.println(list);
-//
-//        for (Loan ln : list)
-//        {
-//            System.out.println(ln.getCompletedDate());
-//        }
-
         return list;
-
     }
 }

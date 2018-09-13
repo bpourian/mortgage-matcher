@@ -34,8 +34,13 @@ without the use of annotations
 
 ###### Sort List Of Objects by Field
 
+
 • [ARTICLE](https://www.codebyamir.com/blog/sort-list-of-objects-by-field-java) which helped me simplify the process of sorting object by field
 
+
+###### Logging
+
+• [ARTICLE](https://stackoverflow.com/questions/5950557/good-examples-using-java-util-logging) how to use logger in Java class
 
 ### Performance
 

@@ -69,11 +69,6 @@ public class InvestmentRequestCsvDaoImpl implements InvestmentRequestDao
             list.add(investmentRequest);
         }
 
-        for (InvestmentRequest ir : list)
-        {
-            System.out.println(ir.getProductType());
-        }
-
         return list;
     }
 }

@@ -1,7 +1,5 @@
 package com.landbay;
 
-import com.landbay.rules.MatchRequestRulesImpl;
-
 import java.io.IOException;
 
 /**
@@ -18,9 +16,15 @@ public class MortgageMatcher
 //
 //        LoanCsvDaoImpl loanCsvDao = new LoanCsvDaoImpl();
 //        loanCsvDao.listLoan();
-
-        MatchRequestRulesImpl matchRequestRules = new MatchRequestRulesImpl();
-        matchRequestRules.sortLoansByOldestFirst();
+//
+//        MatchRequestRulesImpl matchRequestRules = new MatchRequestRulesImpl();
+//        matchRequestRules.sortLoansByOldestFirst();
+//        matchRequestRules.sortProductTypesIntoLists(investmentRequestCsvDaoImpl.listInvestmentRequests());
+//        System.out.println(matchRequestRules.sortLoansByOldestFirst());
+//
+//        System.out.println(matchRequestRules.getFixedInvestmentRequestsList().get(0).getInvestor());
+//        System.out.println(matchRequestRules.getTrackerInvestmentRequestsList());
+//
 
 
     }
