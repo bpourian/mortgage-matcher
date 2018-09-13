@@ -9,20 +9,20 @@ import static org.hamcrest.Matchers.instanceOf;
 /**
  * Unit test for the MatchRequest class
  */
-public class MatchRequestsTest
+public class MatchRequestTest
 {
-    private MatchRequests matchRequests;
+    private MatchRequest matchRequest;
 
     @BeforeEach
     public void init()
     {
-        matchRequests = new MatchRequests();
+        matchRequest = new MatchRequest();
     }
 
     @Test
     void MatchRequestsToBeDefined()
     {
-        assertThat(matchRequests, instanceOf(MatchRequests.class));
+        assertThat(matchRequest, instanceOf(MatchRequest.class));
     }
 
 }
