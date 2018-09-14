@@ -39,11 +39,14 @@ public class MatchRequestRulesImpl implements MatchRequestRules {
         return this.fixedInvestmentRequests;
     }
 
-    @Override
-    public List<Loan> sortLoansByOldestFirst() {
-        return sortLoansByOldestFirst(loanCsvDaoImp.listLoan());
-    }
+    // interface methods implemented
 
+    /**
+     * Returns a sorted list of loans in date order - oldest first
+     * @param unsortedList
+     * @return
+     */
+    @Override
     public List<Loan> sortLoansByOldestFirst(List<Loan> unsortedList)
     {
         return unsortedList.stream()
@@ -51,12 +54,11 @@ public class MatchRequestRulesImpl implements MatchRequestRules {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Sorts Fixed and Tracker investment requests from the InvestmentRequestDao
+     * @param unsortedList
+     */
     @Override
-    public void sortProductTypesIntoLists()
-    {
-        sortProductTypesIntoLists(investmentRequestCsvDao.listInvestmentRequests());
-    }
-
     public void sortProductTypesIntoLists(List<InvestmentRequest> unsortedList)
     {
        for (InvestmentRequest inv : unsortedList)
@@ -72,5 +74,24 @@ public class MatchRequestRulesImpl implements MatchRequestRules {
                    LOGGER.info("The product type specified is invalid for " + inv.getInvestor());
                    break;
            }
+    }
+
+
+    /**
+     * Returns list of investment requests that exceed the loan term
+     * @param loan
+     * @param investmentRequests
+     * @return
+     */
+    @Override
+    public List<InvestmentRequest> investmentRequestTermFilter(Loan loan, List<InvestmentRequest> investmentRequests)
+    {
+        List<InvestmentRequest> sortedList = new ArrayList<>();
+
+        for (InvestmentRequest inv : investmentRequests)
+            if (inv.getTerm() > loan.getTerm())
+                sortedList.add(inv);
+
+        return sortedList;
     }
 }

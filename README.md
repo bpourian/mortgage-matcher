@@ -1,5 +1,9 @@
 # Mortgage Matcher
 
+## Questions to clarify with client
+
+• Is the term calculated in years or months?
+
 ## Design and Performance Decisions
 
 ### Useful Articles and Reading
