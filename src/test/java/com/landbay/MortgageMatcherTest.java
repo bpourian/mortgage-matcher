@@ -2,6 +2,6 @@ package com.landbay;
 
 
 /**
- * Unit test for MortgageMatcher Class
+ * Unit test for Main Class
  */
 public class MortgageMatcherTest {}

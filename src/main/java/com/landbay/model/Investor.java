@@ -8,7 +8,7 @@ package com.landbay.model;
  *  - productType
  *  - term
  */
-public class InvestmentRequest {
+public class Investor {
 
     private String investor;
 
@@ -18,9 +18,9 @@ public class InvestmentRequest {
 
     private int term;
 
-    public  InvestmentRequest(){};
+    public Investor(){};
 
-    public InvestmentRequest(String investor, int investmentAmount, String productType, int term)
+    public Investor(String investor, int investmentAmount, String productType, int term)
     {
         this.investor = investor;
         this.investmentAmount = investmentAmount;

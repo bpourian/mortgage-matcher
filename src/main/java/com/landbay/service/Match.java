@@ -1,4 +1,4 @@
 package com.landbay.service;
 
-public class MatchRequest {
+public class Match {
 }

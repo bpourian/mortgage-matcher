@@ -1,6 +1,6 @@
 package com.landbay.dao;
 
-import com.landbay.model.InvestmentRequest;
+import com.landbay.model.Investor;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -15,25 +15,25 @@ import java.util.List;
 
 
 /**
- * This class implements InvestmentRequestDao interface
+ * This class implements InvestorDao interface
  * and lists all investment requests from the csv file
  */
-public class InvestmentRequestCsvDaoImpl implements InvestmentRequestDao
+public class InvestorCsvDaoImpl implements InvestorDao
 {
     private String CSV_FILE_PATH;
 
-    public InvestmentRequestCsvDaoImpl(String CSV_FILE_PATH)
+    public InvestorCsvDaoImpl(String CSV_FILE_PATH)
     {
         this.CSV_FILE_PATH = CSV_FILE_PATH;
     }
 
     // default constructor
-    public InvestmentRequestCsvDaoImpl()
+    public InvestorCsvDaoImpl()
     {
         this("src/main/resources/data/investmentRequests.csv");
     }
 
-    public List<InvestmentRequest> listInvestmentRequests()
+    public List<Investor> listInvestmentRequests()
     {
         Reader reader;
         try {
@@ -45,28 +45,28 @@ public class InvestmentRequestCsvDaoImpl implements InvestmentRequestDao
         // Using below strategy to decouple
         // this library from the model and
         // avoid using annotations
-        ColumnPositionMappingStrategy<InvestmentRequest> strategy;
+        ColumnPositionMappingStrategy<Investor> strategy;
         strategy = new ColumnPositionMappingStrategy<>();
 
-        strategy.setType(InvestmentRequest.class);
+        strategy.setType(Investor.class);
         String[] memberFieldsToBindTo = {"investor", "investmentAmount", "productType", "term"};
         strategy.setColumnMapping(memberFieldsToBindTo);
 
-        CsvToBean<InvestmentRequest> csvToBean; // creating a bean collection with type InvestmentRequest
-        csvToBean = new CsvToBeanBuilder<InvestmentRequest>(reader)
+        CsvToBean<Investor> csvToBean; // creating a bean collection with type Investor
+        csvToBean = new CsvToBeanBuilder<Investor>(reader)
                 .withMappingStrategy(strategy)
                 .withSkipLines(1)
                 .withIgnoreLeadingWhiteSpace(true)
                 .build();
 
-        Iterator<InvestmentRequest> investmentRequestIterator = csvToBean.iterator();
+        Iterator<Investor> investorIterator = csvToBean.iterator();
 
-        List<InvestmentRequest> list = new ArrayList<>();
+        List<Investor> list = new ArrayList<>();
 
-        while (investmentRequestIterator.hasNext())
+        while (investorIterator.hasNext())
         {
-            InvestmentRequest investmentRequest = investmentRequestIterator.next();
-            list.add(investmentRequest);
+            Investor investor = investorIterator.next();
+            list.add(investor);
         }
 
         return list;

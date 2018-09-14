@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Unit tests for InvRequest class
  */
-public class InvestmentRequestTest {
+public class InvestorTest {
 
-    private InvestmentRequest invRequest;
+    private Investor invRequest;
 
     // test data
     private String investor = "Alex";
@@ -25,13 +25,13 @@ public class InvestmentRequestTest {
     @BeforeEach
     public void init()
     {
-        invRequest = new InvestmentRequest(investor, investmentAmount, productType, term);
+        invRequest = new Investor(investor, investmentAmount, productType, term);
     }
 
     @Test
     void InvestmentRequestToBeDefined()
     {
-        assertThat(invRequest, instanceOf(InvestmentRequest.class));
+        assertThat(invRequest, instanceOf(Investor.class));
     }
 
     @Test

@@ -7,22 +7,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 
 /**
- * Unit test for the MatchRequest class
+ * Unit test for the Match class
  */
-public class MatchRequestTest
+public class MatchTest
 {
-    private MatchRequest matchRequest;
+    private Match match;
 
     @BeforeEach
     public void init()
     {
-        matchRequest = new MatchRequest();
+        match = new Match();
     }
 
     @Test
     void MatchRequestsToBeDefined()
     {
-        assertThat(matchRequest, instanceOf(MatchRequest.class));
+        assertThat(match, instanceOf(Match.class));
     }
 
 }
