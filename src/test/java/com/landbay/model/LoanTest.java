@@ -14,16 +14,16 @@ public class LoanTest {
 
     private Loan loan;
 
-    // test data
-    private int loanId = 2;
-    private int loanAmount = 20000;
-    private String product = "TRACKER";
-    private int term = 25;
-    private String completedDate = "01/01/2018";
-
     @BeforeEach
-    void init()
+    void setUp()
     {
+        // test data
+        int loanId = 2;
+        int loanAmount = 20000;
+        String product = "TRACKER";
+        int term = 25;
+        String completedDate = "01/01/2018";
+
         loan = new Loan(loanId, loanAmount, product, term, completedDate);
     }
 
@@ -34,31 +34,31 @@ public class LoanTest {
     }
 
     @Test
-    void LoanToReturnLoanId()
+    void getLoanId()
     {
         assertEquals(2, loan.getLoanId());
     }
 
     @Test
-    void LoanToReturnLoanAmount()
+    void getLoanAmount()
     {
-        assertEquals(20000, loan.getLoandAmount());
+        assertEquals(20000, loan.getLoanAmount());
     }
 
     @Test
-    void LoanToReturnProduct()
+    void getProduct()
     {
         assertEquals("TRACKER", loan.getProduct());
     }
 
     @Test
-    void LoanToReturnTerm()
+    void getTerm()
     {
         assertEquals(25, loan.getTerm());
     }
 
     @Test
-    void LoanToReturnCompletedDate()
+    void getCompletedDate()
     {
         assertEquals("01/01/2018", loan.getCompletedDate());
     }

@@ -2,12 +2,24 @@ package com.landbay.model;
 
 import java.util.HashMap;
 
-public class FundedLoans {
+public class FundedLoan {
 
     private int loanId;
     private int loanAmount;
     private String completedDate;
-    private HashMap<String, Integer > investors;
+    private int amountUnfunded;
+    private boolean fundedStatus = false;
+    private HashMap<String, Integer > investors = new HashMap<>();
+
+    public FundedLoan(){}
+
+    public FundedLoan(int loanId, int loanAmount, String completedDate)
+    {
+        this.loanId = loanId;
+        this.loanAmount = loanAmount;
+        this.completedDate = completedDate;
+        this.amountUnfunded = loanAmount;
+    }
 
     // public getters and setters
 
@@ -39,13 +51,29 @@ public class FundedLoans {
         return investors;
     }
 
-    public void setInvestors(HashMap<String, Integer> investors) {
-        this.investors = investors;
+    public void setInvestors(String name, int amount) {
+        this.investors.put(name, amount);
+    }
+
+    public boolean getFundedStatus() {
+        return fundedStatus;
+    }
+
+    public void setFundedStatus(boolean fundedStatus) {
+        this.fundedStatus = fundedStatus;
+    }
+
+    public int getAmountUnfunded() {
+        return amountUnfunded;
+    }
+
+    public void setAmountUnfunded(int amountUnfunded) {
+        this.amountUnfunded = amountUnfunded;
     }
 
     @Override
     public String toString() {
-        return "FundedLoans{" +
+        return "FundedLoan{" +
                 "loanId=" + loanId +
                 ", loanAmount=" + loanAmount +
                 ", completedDate='" + completedDate + '\'' +

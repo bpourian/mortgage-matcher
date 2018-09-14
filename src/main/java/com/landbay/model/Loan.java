@@ -21,10 +21,6 @@ public class Loan {
 
     private String completedDate; // format DD/MM/YYYY
 
-    private int amountUnfunded = loanAmount;
-
-    private boolean fundedStatus = false;
-
     public Loan(){}
 
     public Loan(int loanId, int loanAmount, String product, int term, String completedDate)
@@ -35,7 +31,6 @@ public class Loan {
         this.term = term;
         this.completedDate = completedDate;
     }
-
 
     // public getters
 
@@ -57,14 +52,6 @@ public class Loan {
 
     public String getCompletedDate() {
         return completedDate;
-    }
-
-    public int getAmountUnfunded() {
-        return amountUnfunded;
-    }
-
-    public boolean getfundedStatus() {
-        return fundedStatus;
     }
 
     // public setters
@@ -89,16 +76,6 @@ public class Loan {
         this.completedDate = completedDate;
     }
 
-    public void setAmountUnfunded(int amountUnfunded) {
-        this.amountUnfunded = amountUnfunded;
-    }
-
-    public void setFundedStatus(boolean fundingStatus) {
-        this.fundedStatus = fundingStatus;
-    }
-
-
-
     @Override
     public String toString() {
         return "Loan{" +
@@ -107,7 +84,6 @@ public class Loan {
                 ", product='" + product + '\'' +
                 ", term=" + term +
                 ", completedDate='" + completedDate + '\'' +
-                ", amountUnfunded=" + amountUnfunded +
                 '}';
     }
 }

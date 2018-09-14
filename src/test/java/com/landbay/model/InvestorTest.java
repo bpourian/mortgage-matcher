@@ -15,43 +15,45 @@ public class InvestorTest {
 
     private Investor invRequest;
 
-    // test data
-    private String investor = "Alex";
-    private int investmentAmount = 10000;
-    private String productType = "FIXED";
-    private int term = 12;
-
-
     @BeforeEach
-    public void init()
+    void setUp()
     {
+        // test data
+        int investmentAmount = 10000;
+        String investor = "Alex";
+        String productType = "FIXED";
+        int term = 12;
         invRequest = new Investor(investor, investmentAmount, productType, term);
+        invRequest.setFundRemaining(10000);
     }
 
     @Test
-    void InvestmentRequestToBeDefined()
+    void InvestorToBeDefined()
     {
         assertThat(invRequest, instanceOf(Investor.class));
     }
 
     @Test
-    void InvestmentRequestToReturnInvestorName()
+    void getInvestor()
     {
         assertEquals("Alex", invRequest.getInvestor());
     }
 
     @Test
-    void InvestmentRequestToReturnInvestmentAmount()
+    void getInvestmentAmount()
     {
         assertEquals(10000, invRequest.getInvestmentAmount());
     }
 
     @Test
-    void InvestmentRequestToReturnProductType()
+    void getProductType()
     {
         assertEquals("FIXED", invRequest.getProductType());
     }
 
     @Test
-    void InvestmentRequestToReturnTerm() { assertEquals(12, invRequest.getTerm()); }
+    void getTerm() { assertEquals(12, invRequest.getTerm()); }
+
+    @Test
+    void getFundRemaining() { assertEquals(10000, invRequest.getFundRemaining()); }
 }

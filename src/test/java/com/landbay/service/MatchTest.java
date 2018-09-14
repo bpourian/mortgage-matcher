@@ -16,13 +16,17 @@ public class MatchTest
     @BeforeEach
     public void init()
     {
-        match = new Match(matchingRules);
+
+//        match = new Match();
     }
+
+//    @Test
+//    void MatchRequestsToBeDefined()
+//    {
+//        assertThat(match, instanceOf(Match.class));
+//    }
 
     @Test
-    void MatchRequestsToBeDefined()
-    {
-        assertThat(match, instanceOf(Match.class));
+    void startMatch() {
     }
-
 }

@@ -18,7 +18,7 @@ public class Investor {
 
     private int term;
 
-    private int fundRemaining = investmentAmount;
+    private int fundRemaining;
 
     public Investor(){};
 
@@ -28,6 +28,7 @@ public class Investor {
         this.investmentAmount = investmentAmount;
         this.productType = productType;
         this.term = term;
+        this.fundRemaining = investmentAmount;
     }
 
 
