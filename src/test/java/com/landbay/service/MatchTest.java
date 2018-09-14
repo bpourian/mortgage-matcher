@@ -16,7 +16,7 @@ public class MatchTest
     @BeforeEach
     public void init()
     {
-        match = new Match();
+        match = new Match(matchingRules);
     }
 
     @Test

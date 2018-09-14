@@ -18,6 +18,8 @@ public class Investor {
 
     private int term;
 
+    private int fundRemaining = investmentAmount;
+
     public Investor(){};
 
     public Investor(String investor, int investmentAmount, String productType, int term)
@@ -39,6 +41,10 @@ public class Investor {
 
     public int getTerm() { return term; }
 
+    public int getFundRemaining() {
+        return fundRemaining;
+    }
+
     // public setters
 
     public void setInvestor(String investor) {
@@ -55,5 +61,20 @@ public class Investor {
 
     public void setTerm(int term) {
         this.term = term;
+    }
+
+    public void setFundRemaining(int fundRemaining) {
+        this.fundRemaining = fundRemaining;
+    }
+
+    @Override
+    public String toString() {
+        return "Investor{" +
+                "investor='" + investor + '\'' +
+                ", investmentAmount=" + investmentAmount +
+                ", productType='" + productType + '\'' +
+                ", term=" + term +
+                ", fundRemaining=" + fundRemaining +
+                '}';
     }
 }
