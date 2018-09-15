@@ -1,7 +1,9 @@
 package com.landbay;
 
 import com.landbay.dao.InvestorCsvDaoImpl;
+import com.landbay.dao.LoanCsvDaoImpl;
 import com.landbay.model.Investor;
+import com.landbay.model.Loan;
 import com.landbay.util.CsvHelper;
 
 /**
@@ -13,13 +15,21 @@ public class Main
 {
     public static void main( String[] args )
     {
-        String[] memberFields = {"investor", "investmentAmount", "productType", "term"};
-        String path = "src/main/resources/data/investmentRequests.csv";
+        String[] memberFieldsInv = {"investor", "investmentAmount", "productType", "term"};
+        String pathInvestment = "src/main/resources/data/investmentRequests.csv";
+        String[] memberFieldsLoa = {"loanId", "loanAmount", "product", "term", "completedDate"};
+        String pathLoan = "src/main/resources/data/loans.csv";
         InvestorCsvDaoImpl investorCsvDao = new InvestorCsvDaoImpl();
-        CsvHelper<Investor> csvHelper = new CsvHelper<>(Investor.class, path, memberFields );
+        CsvHelper<Investor> csvHelper = new CsvHelper<>(Investor.class, pathInvestment, memberFieldsInv );
+
+        LoanCsvDaoImpl loanCsvDao = new LoanCsvDaoImpl();
+        CsvHelper<Loan> csvHelper2 = new CsvHelper<>(Loan.class, pathLoan, memberFieldsLoa );
 
 
         for (Investor in : investorCsvDao.getInvestors(csvHelper))
+            System.out.println(in);
+
+        for (Loan in : loanCsvDao.getLoans(csvHelper2))
             System.out.println(in);
     }
 }

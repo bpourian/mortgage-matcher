@@ -1,6 +1,7 @@
 package com.landbay.dao;
 
 import com.landbay.model.Loan;
+import com.landbay.util.CsvHelper;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ import java.util.List;
  */
 public interface LoanDao {
 
-    List<Loan> getLoans();
+    List<Loan> getLoans(CsvHelper csvHelper);
 }

@@ -1,14 +1,8 @@
 package com.landbay.dao;
 
 import com.landbay.model.Loan;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
+import com.landbay.util.CsvHelper;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,47 +13,10 @@ import java.util.List;
  */
 public class LoanCsvDaoImpl implements LoanDao
 {
-    private String CSV_FILE_PATH;
-
-    public LoanCsvDaoImpl(String CSV_FILE_PATH)
+    public List<Loan> getLoans(CsvHelper csvHelper)
     {
-        this.CSV_FILE_PATH = CSV_FILE_PATH;
-    }
-
-    // default constructor
-    public LoanCsvDaoImpl()
-    {
-        this("src/main/resources/data/loans.csv");
-    }
-
-    public List<Loan> getLoans() {
-        Reader reader;
-        try {
-            reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-        // Using below strategy to decouple
-        // this library from the model and
-        // avoid using annotations
-        ColumnPositionMappingStrategy<Loan> strategy;
-        strategy = new ColumnPositionMappingStrategy<>();
-        strategy.setType(Loan.class);
-        String[] memberFieldsToBindTo = {"loanId", "loanAmount", "product", "term", "completedDate"};
-        strategy.setColumnMapping(memberFieldsToBindTo);
-
-        CsvToBean<Loan> csvToBean; // creating a bean collection with type Loan
-        csvToBean = new CsvToBeanBuilder<Loan>(reader)
-                .withMappingStrategy(strategy)
-                .withSkipLines(1)
-                .withIgnoreLeadingWhiteSpace(true)
-                .build();
-
-        Iterator<Loan> investmentRequestIterator = csvToBean.iterator();
-
+        Iterator<Loan> investmentRequestIterator = csvHelper.csvToBeanIterator();
         List<Loan> list = new ArrayList<>();
-
         while (investmentRequestIterator.hasNext())
         {
             Loan loan = investmentRequestIterator.next();
@@ -69,9 +26,7 @@ public class LoanCsvDaoImpl implements LoanDao
                     loan.getTerm(),
                     loan.getCompletedDate());
             list.add(newLoan);
-            System.out.println(newLoan);
         }
-
         return list;
     }
 }

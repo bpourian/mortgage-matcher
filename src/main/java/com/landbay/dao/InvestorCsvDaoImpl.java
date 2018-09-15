@@ -14,19 +14,6 @@ import java.util.List;
  */
 public class InvestorCsvDaoImpl implements InvestorDao
 {
-    private String CSV_FILE_PATH;
-
-    public InvestorCsvDaoImpl(String CSV_FILE_PATH)
-    {
-        this.CSV_FILE_PATH = CSV_FILE_PATH;
-    }
-
-    // default constructor
-    public InvestorCsvDaoImpl()
-    {
-        this("src/main/resources/data/investmentRequests.csv");
-    }
-
     @Override
     public List<Investor> getInvestors(CsvHelper csvHelper)
     {
