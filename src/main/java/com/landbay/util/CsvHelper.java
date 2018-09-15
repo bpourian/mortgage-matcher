@@ -20,6 +20,12 @@ public class CsvHelper<T> {
     private Reader reader;
     private String[] memberFieldsToBind;
 
+    /**
+     * This constructor starts the read from file process and allows you specify a class type
+     * @param type
+     * @param filePath
+     * @param memberFieldsToBind
+     */
     public CsvHelper(Class type, String filePath, String... memberFieldsToBind)
     {
         this.myClass = type;

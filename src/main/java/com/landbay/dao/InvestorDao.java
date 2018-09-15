@@ -1,6 +1,7 @@
 package com.landbay.dao;
 
 import com.landbay.model.Investor;
+import com.landbay.util.CsvHelper;
 
 import java.util.List;
 
@@ -9,6 +10,6 @@ import java.util.List;
  */
 public interface InvestorDao {
 
-    List<Investor> getInvestors();
+    List<Investor> getInvestors(CsvHelper csvHelper);
 
 }

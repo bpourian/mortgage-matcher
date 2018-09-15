@@ -1,14 +1,8 @@
 package com.landbay.dao;
 
 import com.landbay.model.Investor;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
+import com.landbay.util.CsvHelper;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,36 +27,11 @@ public class InvestorCsvDaoImpl implements InvestorDao
         this("src/main/resources/data/investmentRequests.csv");
     }
 
-    public List<Investor> getInvestors()
+    @Override
+    public List<Investor> getInvestors(CsvHelper csvHelper)
     {
-        Reader reader;
-        try {
-            reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-        // Using below strategy to decouple
-        // this library from the model and
-        // avoid using annotations
-        ColumnPositionMappingStrategy<Investor> strategy;
-        strategy = new ColumnPositionMappingStrategy<>();
-
-        strategy.setType(Investor.class);
-        String[] memberFieldsToBindTo = {"investor", "investmentAmount", "productType", "term"};
-        strategy.setColumnMapping(memberFieldsToBindTo);
-
-        CsvToBean<Investor> csvToBean; // creating a bean collection with type Investor
-        csvToBean = new CsvToBeanBuilder<Investor>(reader)
-                .withMappingStrategy(strategy)
-                .withSkipLines(1)
-                .withIgnoreLeadingWhiteSpace(true)
-                .build();
-
-        Iterator<Investor> investorIterator = csvToBean.iterator();
-
+        Iterator<Investor> investorIterator = csvHelper.csvToBeanIterator();
         List<Investor> list = new ArrayList<>();
-
         while (investorIterator.hasNext())
         {
             Investor investor = investorIterator.next();

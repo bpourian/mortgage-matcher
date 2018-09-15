@@ -22,7 +22,6 @@ class CsvHelperTest {
 
     @Test
     void csvToBeanIterator() {
-
         Iterator<Investor> investorIterator = csvHelper.csvToBeanIterator();
         while (investorIterator.hasNext()) {
             Investor investor = investorIterator.next();
