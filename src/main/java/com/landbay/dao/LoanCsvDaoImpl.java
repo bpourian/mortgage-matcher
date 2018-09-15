@@ -32,7 +32,7 @@ public class LoanCsvDaoImpl implements LoanDao
         this("src/main/resources/data/loans.csv");
     }
 
-    public List<Loan> listLoan() {
+    public List<Loan> getLoans() {
         Reader reader;
         try {
             reader = Files.newBufferedReader(Paths.get(CSV_FILE_PATH));
@@ -63,7 +63,13 @@ public class LoanCsvDaoImpl implements LoanDao
         while (investmentRequestIterator.hasNext())
         {
             Loan loan = investmentRequestIterator.next();
-            list.add(loan);
+            Loan newLoan = new Loan(loan.getLoanId(),
+                    loan.getLoanAmount(),
+                    loan.getProduct(),
+                    loan.getTerm(),
+                    loan.getCompletedDate());
+            list.add(newLoan);
+            System.out.println(newLoan);
         }
 
         return list;

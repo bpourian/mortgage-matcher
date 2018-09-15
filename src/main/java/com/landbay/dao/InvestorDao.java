@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface InvestorDao {
 
-    List<Investor> listInvestmentRequests();
+    List<Investor> getInvestors();
 
 }

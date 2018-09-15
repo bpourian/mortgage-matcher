@@ -33,7 +33,7 @@ public class InvestorCsvDaoImpl implements InvestorDao
         this("src/main/resources/data/investmentRequests.csv");
     }
 
-    public List<Investor> listInvestmentRequests()
+    public List<Investor> getInvestors()
     {
         Reader reader;
         try {
@@ -66,9 +66,12 @@ public class InvestorCsvDaoImpl implements InvestorDao
         while (investorIterator.hasNext())
         {
             Investor investor = investorIterator.next();
-            list.add(investor);
+            Investor newInvestor = new Investor(investor.getInvestor(),
+                    investor.getInvestmentAmount(),
+                    investor.getProductType(),
+                    investor.getTerm());
+            list.add(newInvestor);
         }
-
         return list;
     }
 }

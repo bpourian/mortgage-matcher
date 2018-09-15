@@ -28,7 +28,7 @@ public class Investor {
         this.investmentAmount = investmentAmount;
         this.productType = productType;
         this.term = term;
-        this.fundRemaining = investmentAmount;
+        this.fundRemaining = this.investmentAmount;
     }
 
 

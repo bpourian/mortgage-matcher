@@ -24,7 +24,6 @@ public class InvestorTest {
         String productType = "FIXED";
         int term = 12;
         invRequest = new Investor(investor, investmentAmount, productType, term);
-        invRequest.setFundRemaining(10000);
     }
 
     @Test

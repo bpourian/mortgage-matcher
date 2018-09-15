@@ -77,9 +77,12 @@ public class Match {
                 fundedLoans.add(fundedLoan);
                 for (Map.Entry<Investor, Integer> pair : updateInvestors.entrySet())
                     pair.getKey().setFundRemaining(pair.getValue());
+
+//                System.out.println(fundedLoan);
             }
         }
 
+//        System.out.println(fundedLoans);
         for (FundedLoan fun : fundedLoans)
             System.out.println(fun.toString());
 
@@ -97,8 +100,13 @@ public class Match {
         List<Investor> investors = new ArrayList<>();
         fundedLoan = new FundedLoan(loan.getLoanId(), loan.getLoanAmount(), loan.getCompletedDate());
 
+//        System.out.println(fundedLoan);
+
+
         if (productType.equals("TRACKER"))
             investors = investorTermFilter(loan, matchingRules.getTrackerInvestors());
+        System.out.println(investors);
+
         if (productType.equals("FIXED"))
             investors = investorTermFilter(loan, matchingRules.getFixedInvestors());
 

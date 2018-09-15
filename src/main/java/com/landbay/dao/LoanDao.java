@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface LoanDao {
 
-    List<Loan> listLoan();
+    List<Loan> getLoans();
 }
