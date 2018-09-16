@@ -75,7 +75,6 @@ public class Investor {
                 ", investmentAmount=" + investmentAmount +
                 ", productType='" + productType + '\'' +
                 ", term=" + term +
-                ", fundRemaining=" + fundRemaining +
                 '}';
     }
 }

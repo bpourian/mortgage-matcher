@@ -17,8 +17,8 @@ public class MatchingRulesImpl implements MatchingRules {
     private List<Investor> fixedInvestors;
 
     public MatchingRulesImpl() {
-        trackerInvestors = new ArrayList<>();
-        fixedInvestors = new ArrayList<>();
+        this.trackerInvestors = new ArrayList<>();
+        this.fixedInvestors = new ArrayList<>();
     }
 
     // public getter methods
@@ -35,7 +35,6 @@ public class MatchingRulesImpl implements MatchingRules {
 
 
     // interface methods implemented
-
     /**
      * Returns a sorted list of loans in date order - oldest first
      * @param unsortedList

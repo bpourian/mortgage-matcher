@@ -83,9 +83,10 @@ public class Match {
         }
 
 //        System.out.println(fundedLoans);
-        for (FundedLoan fun : fundedLoans)
-            System.out.println(fun.toString());
+//        for (FundedLoan fun : fundedLoans)
+//            System.out.println(fun.toString());
 
+        System.out.println("{Investor}");
     }
 
     /**
@@ -95,12 +96,12 @@ public class Match {
      * @param productType
      * @param loan
      */
-    private void processLoan(String productType, Loan loan)
+    void processLoan(String productType, Loan loan)
     {
         List<Investor> investors = new ArrayList<>();
         fundedLoan = new FundedLoan(loan.getLoanId(), loan.getLoanAmount(), loan.getCompletedDate());
 
-//        System.out.println(fundedLoan);
+        System.out.println(fundedLoan);
 
 
         if (productType.equals("TRACKER"))
@@ -110,11 +111,17 @@ public class Match {
         if (productType.equals("FIXED"))
             investors = investorTermFilter(loan, matchingRules.getFixedInvestors());
 
+        System.out.println(matchingRules.getFixedInvestors());
+        System.out.println(investors);
         while (!investors.isEmpty() && !fundedLoan.getFundedStatus())
         {
+            System.out.println("Hello this is in while loop");
+
             fundTheLoan(investors.get(0), fundedLoan);
             investors.remove(0);
         }
+        System.out.println("We are existing now");
+
     }
 
     /**

@@ -7,10 +7,6 @@ import com.landbay.model.Loan;
 import com.landbay.rules.MatchingRulesImpl;
 import com.landbay.util.CsvHelper;
 import org.junit.jupiter.api.*;
-//import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -34,6 +30,9 @@ public class MatchTest
 
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private static final PrintStream originalOut = System.out;
+
+    //move to beforeeach block after confirmation
+    private List<Loan> loans;
 
     @BeforeAll
     static void beforeAll()
@@ -59,7 +58,7 @@ public class MatchTest
         CsvHelper<Loan> csvHelperLoan = new CsvHelper<>(Loan.class, pathLoan, memberFieldsLoan);
         CsvHelper<Investor> csvHelperInvestor = new CsvHelper<>(Investor.class, pathInvestment, memberFieldsInv);
 
-        List<Loan> loans = loanCsvDao.getLoans(csvHelperLoan);
+        loans = loanCsvDao.getLoans(csvHelperLoan);
         List<Investor> investors = investorCsvDao.getInvestors(csvHelperInvestor);
 
         match = new Match(matchingRules, loans, investors);
@@ -84,7 +83,6 @@ public class MatchTest
     void systemPrintOutTest()
     {
         System.out.println("Landbay Java Application");
-
         assertEquals("Landbay Java Application\n", outContent.toString());
     }
 
@@ -92,7 +90,9 @@ public class MatchTest
     @DisplayName("Should print to terminal a list of qualified loans")
     void startMatch()
     {
-//        assertEquals("", match.startMatch());
+        match.processLoan("FIXED", loans.get(2));
+//        match.startMatch();
+        assertEquals("{Investor}\n", outContent.toString());
     }
 }
 
