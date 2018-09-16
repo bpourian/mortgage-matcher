@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 class InvestorCsvDaoImplTest {
@@ -51,7 +51,7 @@ class InvestorCsvDaoImplTest {
         Investor act = actual.get(0);
         Investor exp = investors.get(0);
 //        assertEquals(exp,act);
-        assertThat(act, equalTo(exp));
+        assertThat(actual, is(investors));
 //        assertThat(actual, IsIterableContainingInAnyOrder.containsInAnyOrder(test));
     }
 }
