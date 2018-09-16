@@ -1,37 +1,57 @@
 package com.landbay.dao;
 
+import com.landbay.model.Investor;
+import com.landbay.util.CsvHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.mockito.Mockito.when;
 
 class InvestorCsvDaoImplTest {
 
     @Mock
-    Reader mockReader;
+    private CsvHelper csvHelperMock;
 
     @InjectMocks
-    InvestorCsvDaoImpl invDao;
+    private InvestorCsvDaoImpl investorCsvDao;
 
     @BeforeEach
-    void setUp() {
-//        mockReader = Mockito.mock(Files.newBufferedReader("src/main/resources/data/investmentRequests.csv"));
-//        try {
-//            Mockito.when(((BufferedReader) mockReader).readLine()).thenReturn("Line 1");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        invDao = new InvestorCsvDaoImpl();
-//        MockitoAnnotations.initMocks(InvestorCsvDaoImpl.class);
+    void setUp()
+    {
+        investorCsvDao = new InvestorCsvDaoImpl();
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void getInvestors() {
-        assertEquals("1", "1");
+    void getInvestors()
+    {
+        Investor inv = new Investor("Jeff", 100, "FIXED", 12);
+        List<Investor> investors = new ArrayList<Investor>();
+        investors.add(inv);
+
+        Iterator<Investor> investorIterator = investors.iterator();
+
+        when(csvHelperMock.csvToBeanIterator()).thenReturn(investorIterator);
+
+        List<Investor> actual = new ArrayList<Investor>();
+        actual.add(investorCsvDao.getInvestors(csvHelperMock).get(0));
+        System.out.println(actual.get(0));
+        System.out.println(investors.get(0));
+
+
+        Investor act = actual.get(0);
+        Investor exp = investors.get(0);
+//        assertEquals(exp,act);
+        assertThat(act, equalTo(exp));
+//        assertThat(actual, IsIterableContainingInAnyOrder.containsInAnyOrder(test));
     }
 }
