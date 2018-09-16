@@ -14,7 +14,7 @@ class FundedLoanTest {
 
     @BeforeEach
     void setUp() {
-        fundedLoan = new FundedLoan(4, 1000, "01/01/2001");
+        fundedLoan = new FundedLoan(4, "TRACKER", 1000, 12, "01/01/2001");
         fundedLoan.setInvestors("James", 1000);
         fundedLoan.setInvestors("Alex", 200);
 

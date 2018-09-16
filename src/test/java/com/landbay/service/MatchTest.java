@@ -33,6 +33,7 @@ public class MatchTest
 
     //move to beforeeach block after confirmation
     private List<Loan> loans;
+    private List<Investor> investors;
 
     @BeforeAll
     static void beforeAll()
@@ -59,7 +60,7 @@ public class MatchTest
         CsvHelper<Investor> csvHelperInvestor = new CsvHelper<>(Investor.class, pathInvestment, memberFieldsInv);
 
         loans = loanCsvDao.getLoans(csvHelperLoan);
-        List<Investor> investors = investorCsvDao.getInvestors(csvHelperInvestor);
+        investors = investorCsvDao.getInvestors(csvHelperInvestor);
 
         match = new Match(matchingRules, loans, investors);
 
@@ -90,8 +91,11 @@ public class MatchTest
     @DisplayName("Should print to terminal a list of qualified loans")
     void startMatch()
     {
-        match.processLoan("FIXED", loans.get(2));
-//        match.startMatch();
+//        match.sortProductTypesIntoLists(investors);
+//
+//        match.processLoan("FIXED", loans.get(0));
+
+        match.startMatch();
         assertEquals("{Investor}\n", outContent.toString());
     }
 }

@@ -21,18 +21,26 @@ public class MatchingRulesImpl implements MatchingRules {
         this.fixedInvestors = new ArrayList<>();
     }
 
-    // public getter methods
+    // public getter and setters methods
 
     public List<Investor> getTrackerInvestors()
     {
         return this.trackerInvestors;
     }
 
+
     public List<Investor> getFixedInvestors()
     {
         return this.fixedInvestors;
     }
 
+    public void setTrackerInvestors(List<Investor> trackerInvestors) {
+        this.trackerInvestors = trackerInvestors;
+    }
+
+    public void setFixedInvestors(List<Investor> fixedInvestors) {
+        this.fixedInvestors = fixedInvestors;
+    }
 
     // interface methods implemented
     /**

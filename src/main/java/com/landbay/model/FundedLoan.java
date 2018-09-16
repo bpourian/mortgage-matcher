@@ -5,18 +5,31 @@ import java.util.HashMap;
 public class FundedLoan {
 
     private int loanId;
+    private String product;
     private int loanAmount;
     private String completedDate;
     private int amountUnfunded;
     private boolean fundedStatus = false;
+    private int term;
     private HashMap<String, Integer > investors = new HashMap<>();
 
-    public FundedLoan(){}
+    public FundedLoan(FundedLoan fundedLoan)
+    {
+        this(
+                fundedLoan.loanId,
+                fundedLoan.product,
+                fundedLoan.loanAmount,
+                fundedLoan.term,
+                fundedLoan.completedDate
+        );
+    }
 
-    public FundedLoan(int loanId, int loanAmount, String completedDate)
+    public FundedLoan(int loanId, String product, int loanAmount, int term, String completedDate)
     {
         this.loanId = loanId;
+        this.product = product;
         this.loanAmount = loanAmount;
+        this.term = term;
         this.completedDate = completedDate;
         this.amountUnfunded = loanAmount;
     }
@@ -71,12 +84,24 @@ public class FundedLoan {
         this.amountUnfunded = amountUnfunded;
     }
 
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "FundedLoan{" +
                 "loanId=" + loanId +
+                ", product='" + product + '\'' +
                 ", loanAmount=" + loanAmount +
+                ", term=" + term +
                 ", completedDate='" + completedDate + '\'' +
+                ", amountUnfunded=" + amountUnfunded +
+                ", fundedStatus=" + fundedStatus +
                 ", investors=" + investors +
                 '}';
     }

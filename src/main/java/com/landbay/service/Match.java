@@ -1,5 +1,7 @@
 package com.landbay.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.landbay.model.FundedLoan;
 import com.landbay.model.Investor;
 import com.landbay.model.Loan;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * This is the main class in the application
@@ -22,16 +25,23 @@ public class Match {
 
     private List<Loan> loanData;
     private List<Investor> investorData;
-    private List<FundedLoan> fundedLoans;
-    private FundedLoan fundedLoan;
+    private List<FundedLoan> listOfFundedLoans;
+    private FundedLoan loanToBeFunded;
 
-    private HashMap<Investor, Integer > updateInvestors = new HashMap<>();
+    private List<Investor> fixedInvestors;
+    private List<Investor> trackerInvestors;
+
+    private HashMap<String, Integer > tempInvList = new HashMap<>();
 
 
     public Match(MatchingRulesImpl matchingRules, List<Loan> loanData, List<Investor> investorData) {
         this.matchingRules = matchingRules;
         this.loanData = loanData;
         this.investorData = investorData;
+
+        this.listOfFundedLoans = new ArrayList<>();
+        this.fixedInvestors = new ArrayList<>();
+        this.trackerInvestors = new ArrayList<>();
     }
 
     private List<Loan> sortLoansByOldestFirst(List<Loan> unsortedList)
@@ -42,6 +52,8 @@ public class Match {
     private void sortProductTypesIntoLists(List<Investor> unsortedList)
     {
         matchingRules.sortProductTypesIntoLists(unsortedList);
+        this.fixedInvestors = matchingRules.getFixedInvestors();
+        this.trackerInvestors = matchingRules.getTrackerInvestors();
     }
 
     private List<Investor> investorTermFilter(Loan loan, List<Investor> investors)
@@ -54,13 +66,11 @@ public class Match {
      */
     public void startMatch()
     {
-        List<Loan> sortedLoans = sortLoansByOldestFirst(this.loanData);
         sortProductTypesIntoLists(this.investorData);
+        List<Loan> sortedLoans = sortLoansByOldestFirst(this.loanData);
 
-        for (Loan ln : sortedLoans)
-        {
-            switch (ln.getProduct())
-            {
+        for (Loan ln : sortedLoans) {
+            switch (ln.getProduct()) {
                 case "TRACKER":
                     processLoan("TRACKER", ln);
                     break;
@@ -72,83 +82,115 @@ public class Match {
             }
 
             /* if the loan is funded update FundedLoans list and the investor details */
-            if (fundedLoan.getFundedStatus() && fundedLoan.getAmountUnfunded() == 0 )
-            {
-                fundedLoans.add(fundedLoan);
-                for (Map.Entry<Investor, Integer> pair : updateInvestors.entrySet())
-                    pair.getKey().setFundRemaining(pair.getValue());
+            if (loanToBeFunded.getFundedStatus()) {
+                listOfFundedLoans.add(loanToBeFunded);
 
-//                System.out.println(fundedLoan);
+                if (loanToBeFunded.getProduct().equals("TRACKER")) {
+                    for (Map.Entry<String, Integer> entry : tempInvList.entrySet())
+                        updateInvestor(entry.getKey(), entry.getValue(), trackerInvestors);
+
+                    tempInvList.clear();
+                } else if (loanToBeFunded.getProduct().equals("FIXED")) {
+                    for (Map.Entry<String, Integer> entry : tempInvList.entrySet())
+                        updateInvestor(entry.getKey(), entry.getValue(), fixedInvestors);
+
+                    tempInvList.clear();
+                }
             }
         }
 
-//        System.out.println(fundedLoans);
-//        for (FundedLoan fun : fundedLoans)
-//            System.out.println(fun.toString());
-
-        System.out.println("{Investor}");
+        printInJsonFormat(listOfFundedLoans);
     }
+
 
     /**
      * This method creates a new funded loan object and
      * filters the loan with the appropriate product type
      *
-     * @param productType
-     * @param loan
+     * @param productType Tracker or Fixed
+     * @param loan specific loan that we are matching
      */
     void processLoan(String productType, Loan loan)
     {
         List<Investor> investors = new ArrayList<>();
-        fundedLoan = new FundedLoan(loan.getLoanId(), loan.getLoanAmount(), loan.getCompletedDate());
-
-        System.out.println(fundedLoan);
-
+        loanToBeFunded = new FundedLoan(
+                loan.getLoanId(),
+                loan.getProduct(),
+                loan.getLoanAmount(),
+                loan.getTerm(),
+                loan.getCompletedDate());
 
         if (productType.equals("TRACKER"))
-            investors = investorTermFilter(loan, matchingRules.getTrackerInvestors());
-        System.out.println(investors);
-
+            investors = investorTermFilter(loan, this.trackerInvestors);
         if (productType.equals("FIXED"))
-            investors = investorTermFilter(loan, matchingRules.getFixedInvestors());
+            investors = investorTermFilter(loan, this.fixedInvestors);
 
-        System.out.println(matchingRules.getFixedInvestors());
-        System.out.println(investors);
-        while (!investors.isEmpty() && !fundedLoan.getFundedStatus())
-        {
-            System.out.println("Hello this is in while loop");
+        for (Investor inv : investors){
+            fundTheLoan(inv, loanToBeFunded);
 
-            fundTheLoan(investors.get(0), fundedLoan);
-            investors.remove(0);
+            if (loanToBeFunded.getFundedStatus())
+                break;
         }
-        System.out.println("We are existing now");
 
     }
 
     /**
      * This method funds the loan with the investment
      *
-     * @param investor
-     * @param loan
+     * @param investor name of individual investor
+     * @param canWeFundThisLoan specific loan that we are matching
      */
-    private void fundTheLoan(Investor investor, FundedLoan loan)
+    private void fundTheLoan(Investor investor, FundedLoan canWeFundThisLoan)
     {
-        if (investor.getFundRemaining() >= loan.getAmountUnfunded())
+        if (investor.getFundRemaining() >= canWeFundThisLoan.getAmountUnfunded())
         {
-            int amountInvested = loan.getAmountUnfunded();
-            updateInvestors.put(investor, amountInvested);
-            loan.setInvestors(investor.getInvestor(), amountInvested);
-            loan.setAmountUnfunded(0);
-            loan.setFundedStatus(true);
+            int amountInvested = canWeFundThisLoan.getAmountUnfunded();
+            tempInvList.put(investor.getInvestor(), amountInvested);
 
-        } else if (investor.getFundRemaining() < loan.getAmountUnfunded())
+            canWeFundThisLoan.setInvestors(investor.getInvestor(), amountInvested);
+            canWeFundThisLoan.setAmountUnfunded(0);
+            canWeFundThisLoan.setFundedStatus(true);
+
+        } else if (investor.getFundRemaining() > 0 && investor.getFundRemaining() < canWeFundThisLoan.getAmountUnfunded())
         {
             int amountInvested = investor.getFundRemaining();
-            updateInvestors.put(investor, amountInvested);
-            loan.setInvestors(investor.getInvestor(), amountInvested);
-            int loanAmountUnfunded = loan.getAmountUnfunded() - amountInvested;
-            loan.setAmountUnfunded(loanAmountUnfunded);
+            tempInvList.put(investor.getInvestor(), amountInvested);
+            canWeFundThisLoan.setInvestors(investor.getInvestor(), amountInvested);
+            int loanAmountUnfunded = canWeFundThisLoan.getAmountUnfunded() - amountInvested;
+            canWeFundThisLoan.setAmountUnfunded(loanAmountUnfunded);
+
+            if (canWeFundThisLoan.getAmountUnfunded() == 0)
+                canWeFundThisLoan.setFundedStatus(true);
         }
     }
 
+    /**
+     * updates investor object from list
+     * @param name of the investor
+     * @param fundInvested amount invested
+     * @param list that the investor belongs to
+     */
+    private void updateInvestor(String name, int fundInvested, List<Investor> list){
+        for (Investor in : list) {
+            if (in.getInvestor().equals(name)) {
+                int fundRemaining = in.getFundRemaining() - fundInvested;
+                in.setFundRemaining(fundRemaining);
+                break;
+            }
+        }
+    }
 
+    /**
+     * Method converts list to json
+     * @param listOfFundedLoans List of all the qualified loans
+     */
+    private void printInJsonFormat(List<FundedLoan> listOfFundedLoans) {
+        for (FundedLoan loan : listOfFundedLoans) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String jsonFormatted = gson.toJson(loan);
+            System.out.println(jsonFormatted);
+        }
+    }
 }
+
+
