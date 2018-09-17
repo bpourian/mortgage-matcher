@@ -26,7 +26,7 @@ public class Main
         String[] memberFieldsLoan = {"loanId", "loanAmount", "product", "term", "completedDate"};
         String pathLoan = "src/main/resources/data/loans.csv";
 
-        /* Read the files provided using the csv helper method*/
+        /* Read the files provided using the csv helper method */
         CsvHelper<Loan> csvHelperLoan = new CsvHelper<>(Loan.class, pathLoan, memberFieldsLoan);
         CsvHelper<Investor> csvHelperInvestor = new CsvHelper<>(Investor.class, pathInvestment, memberFieldsInv);
 
@@ -36,7 +36,7 @@ public class Main
         List<Loan> loans = loanCsvDao.getLoans(csvHelperLoan);
         List<Investor> investors = investorCsvDao.getInvestors(csvHelperInvestor);
 
-        /* Create a new instance of matching rules to an instance of Match */
+        /* Pass a new instance of matching rules to an instance of Match */
         MatchingRulesImpl matchingRules = new MatchingRulesImpl();
 
         Match match = new Match(matchingRules, loans, investors);
