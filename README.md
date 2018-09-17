@@ -1,8 +1,69 @@
 # Mortgage Matcher
 
+## In brief 
+
+The aim of this application is to take in two sources of data that contain information which correlate with the defined models `Investor` and `Loan`.
+In designing this app I have considered the object oriented developments main principals as per below:
+
+
+## My thoughts 
+
+I have really enjoyed working on this challenge. This exercise allowed me to demonstrate my understanding of
+object oriented design and put me outside of my comfort zone as I haven't created anything like this before using
+Java.
+
+In solving this challenge and producing the code in this repository I sifted pages after pages of StackOverflow questions, 
+blogs and articles. I have included below example of few of these useful articles.
+
+## Test Driven Development
+
+I set out with the aim that I was going to test drive the development of this feature. However I found myself fairly confused
+as most things I tried were new to me and it was more the case of complete the project and add unit test once you have
+a better understanding of Java.
+
+I have tried to test the main methods and use stubbing and mocks using Mockito. I feel that some of the tests were unnecessary, 
+such as the getter methods. But I couldn't really make up my mind if it was useful or not!
+
+## Technical Debt
+
+I suppose every project does build up a level of technical debt usually time being the main factor. Ensuring that I kept 
+an eye on progress and improvements to this feature I used the github issues tab.
+
+You will find that I have left some open to revisit in the future. I would say namely the parts which need refactoring and 
+enhancing are around the mocking and stubbing out of some classes in my unit tests.
+
+
+##### Encapsulation
+
+Using private methods and variables where necessary to hide the internal workings of a class. This is more obviously mainly demonstrated
+in the getter and setter methods
+
+##### Abstraction
+
+I have used interfaces to create a blue print to dictate the behaviors that are expected in certain classes. However implementation of those methods were specific
+to the type of Object I was dealing with. Example of this is demonstrated in the DAO directory. I have a specific implementation for 
+my Investor Object and Loan Object being created using a CSV. 
+
+However, if this data source does change in the future as long as the implementation returns the type of data I expect my code shouldn't break.
+
+
+##### Inheritance
+
+Although I haven't specifically used inheritance in this project. I have identified an aread that I could've demonstrated
+this principal. 
+
+In my model directory my `FundedLoan` class could've inherited from both `Investor` and `Loan`.
+
+
+#### Polymorphism
+
+Creating overloaded constructors although I appreciate this principal is more closely associated with overloaded methods.
+
+
 ## Questions to clarify with client
 
 • Is the term calculated in years or months?
+    Answer: months
 
 ## Design and Performance Decisions
 
