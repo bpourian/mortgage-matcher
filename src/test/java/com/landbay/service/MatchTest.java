@@ -33,15 +33,15 @@ public class MatchTest
         MatchingRulesImpl matchingRulesMock = new MatchingRulesImpl();
 
         Loan mockLoan = new Loan(2, 99000, "FIXED", 10, "02/01/2015");
-        Investor fixedInvestor = new Investor("Ben", 100000, "FIXED", 12);
-        Investor trackerInvestor = new Investor("Gary", 200000, "TRACKER", 14);
+        Investor mockFixedInvestor = new Investor("Ben", 100000, "FIXED", 12);
+        Investor mockTrackerInvestor = new Investor("Gary", 200000, "TRACKER", 14);
 
         List<Loan> loans = new ArrayList<>();
         List<Investor> investors = new ArrayList<>();
 
         loans.add(mockLoan);
-        investors.add(fixedInvestor);
-        investors.add(trackerInvestor);
+        investors.add(mockFixedInvestor);
+        investors.add(mockTrackerInvestor);
 
         match = new Match(matchingRulesMock, loans, investors);
     }

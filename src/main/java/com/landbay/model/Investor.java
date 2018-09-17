@@ -1,13 +1,5 @@
 package com.landbay.model;
 
-/**
- * This class creates an investor object with
- * the following instance variables:
- *  - investor
- *  - investmentAmount
- *  - productType
- *  - term
- */
 public class Investor {
 
     private String investor;
@@ -31,9 +23,6 @@ public class Investor {
         this.fundRemaining = this.investmentAmount;
     }
 
-
-    // public getters
-
     public String getInvestor() { return investor; }
 
     public int getInvestmentAmount() { return investmentAmount; }
@@ -45,8 +34,6 @@ public class Investor {
     public int getFundRemaining() {
         return fundRemaining;
     }
-
-    // public setters
 
     public void setInvestor(String investor) {
         this.investor = investor;

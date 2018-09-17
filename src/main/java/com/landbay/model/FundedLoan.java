@@ -13,17 +13,6 @@ public class FundedLoan {
     private int term;
     private HashMap<String, Integer > investors = new HashMap<>();
 
-    public FundedLoan(FundedLoan fundedLoan)
-    {
-        this(
-                fundedLoan.loanId,
-                fundedLoan.product,
-                fundedLoan.loanAmount,
-                fundedLoan.term,
-                fundedLoan.completedDate
-        );
-    }
-
     public FundedLoan(int loanId, String product, int loanAmount, int term, String completedDate)
     {
         this.loanId = loanId;
@@ -33,8 +22,6 @@ public class FundedLoan {
         this.completedDate = completedDate;
         this.amountUnfunded = loanAmount;
     }
-
-    // public getters and setters
 
     public int getLoanId() {
         return loanId;
