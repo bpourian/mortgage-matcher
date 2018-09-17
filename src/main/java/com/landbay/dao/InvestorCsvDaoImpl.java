@@ -7,11 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-/**
- * This class implements InvestorDao interface
- * and lists all investment requests from the csv file
- */
 public class InvestorCsvDaoImpl implements InvestorDao
 {
     @Override

@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * This is the main class in the application
  * where the logic is applied
@@ -31,7 +30,7 @@ public class Match {
     private List<Investor> fixedInvestors;
     private List<Investor> trackerInvestors;
 
-    private HashMap<String, Integer > tempInvList = new HashMap<>();
+    private HashMap<String, Integer > tempInvestorList = new HashMap<>();
 
 
     public Match(MatchingRulesImpl matchingRules, List<Loan> loanData, List<Investor> investorData) {
@@ -86,15 +85,15 @@ public class Match {
                 listOfFundedLoans.add(loanToBeFunded);
 
                 if (loanToBeFunded.getProduct().equals("TRACKER")) {
-                    for (Map.Entry<String, Integer> entry : tempInvList.entrySet())
+                    for (Map.Entry<String, Integer> entry : tempInvestorList.entrySet())
                         updateInvestor(entry.getKey(), entry.getValue(), trackerInvestors);
 
-                    tempInvList.clear();
+                    tempInvestorList.clear();
                 } else if (loanToBeFunded.getProduct().equals("FIXED")) {
-                    for (Map.Entry<String, Integer> entry : tempInvList.entrySet())
+                    for (Map.Entry<String, Integer> entry : tempInvestorList.entrySet())
                         updateInvestor(entry.getKey(), entry.getValue(), fixedInvestors);
 
-                    tempInvList.clear();
+                    tempInvestorList.clear();
                 }
             }
         }
@@ -110,7 +109,7 @@ public class Match {
      * @param productType Tracker or Fixed
      * @param loan specific loan that we are matching
      */
-    void processLoan(String productType, Loan loan)
+    private void processLoan(String productType, Loan loan)
     {
         List<Investor> investors = new ArrayList<>();
         loanToBeFunded = new FundedLoan(
@@ -145,7 +144,7 @@ public class Match {
         if (investor.getFundRemaining() >= canWeFundThisLoan.getAmountUnfunded())
         {
             int amountInvested = canWeFundThisLoan.getAmountUnfunded();
-            tempInvList.put(investor.getInvestor(), amountInvested);
+            tempInvestorList.put(investor.getInvestor(), amountInvested);
 
             canWeFundThisLoan.setInvestors(investor.getInvestor(), amountInvested);
             canWeFundThisLoan.setAmountUnfunded(0);
@@ -154,7 +153,7 @@ public class Match {
         } else if (investor.getFundRemaining() > 0 && investor.getFundRemaining() < canWeFundThisLoan.getAmountUnfunded())
         {
             int amountInvested = investor.getFundRemaining();
-            tempInvList.put(investor.getInvestor(), amountInvested);
+            tempInvestorList.put(investor.getInvestor(), amountInvested);
             canWeFundThisLoan.setInvestors(investor.getInvestor(), amountInvested);
             int loanAmountUnfunded = canWeFundThisLoan.getAmountUnfunded() - amountInvested;
             canWeFundThisLoan.setAmountUnfunded(loanAmountUnfunded);

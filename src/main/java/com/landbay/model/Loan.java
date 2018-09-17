@@ -1,14 +1,5 @@
 package com.landbay.model;
 
-/**
- * This class creates a loan object with
- * the following instance variables:
- *  - loanId
- *  - loanAmount
- *  - product
- *  - term
- *  - completedDate
- */
 public class Loan {
 
     private int loanId;

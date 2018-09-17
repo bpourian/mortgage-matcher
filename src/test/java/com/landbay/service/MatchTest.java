@@ -1,74 +1,53 @@
 package com.landbay.service;
 
-import com.landbay.dao.InvestorCsvDaoImpl;
-import com.landbay.dao.LoanCsvDaoImpl;
 import com.landbay.model.Investor;
 import com.landbay.model.Loan;
 import com.landbay.rules.MatchingRulesImpl;
-import com.landbay.util.CsvHelper;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * Unit test for the Match class
- */
 @DisplayName("Match class Unit and End to End Test")
 public class MatchTest
 {
     private Match match;
 
-    private MatchingRulesImpl matchingRules;
-    private LoanCsvDaoImpl loanCsvDao;
-    private InvestorCsvDaoImpl investorCsvDao;
-
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private static final PrintStream originalOut = System.out;
-
-    //move to beforeeach block after confirmation
-    private List<Loan> loans;
-    private List<Investor> investors;
-
-    @BeforeAll
-    static void beforeAll()
-    {
-        System.setOut(new PrintStream(outContent));
-    }
-
-
 
     @BeforeEach
     void beforeEach()
     {
-        String[] memberFieldsInv = {"investor", "investmentAmount", "productType", "term"};
-        String pathInvestment = "src/main/resources/data/investmentRequests.csv";
+        System.setOut(new PrintStream(outContent));
 
-        String[] memberFieldsLoan = {"loanId", "loanAmount", "product", "term", "completedDate"};
-        String pathLoan = "src/main/resources/data/loans.csv";
+        MatchingRulesImpl matchingRulesMock = new MatchingRulesImpl();
 
-        matchingRules = new MatchingRulesImpl();
-        loanCsvDao = new LoanCsvDaoImpl();
-        investorCsvDao = new InvestorCsvDaoImpl();
+        Loan mockLoan = new Loan(2, 99000, "FIXED", 10, "02/01/2015");
+        Investor fixedInvestor = new Investor("Ben", 100000, "FIXED", 12);
+        Investor trackerInvestor = new Investor("Gary", 200000, "TRACKER", 14);
 
-        CsvHelper<Loan> csvHelperLoan = new CsvHelper<>(Loan.class, pathLoan, memberFieldsLoan);
-        CsvHelper<Investor> csvHelperInvestor = new CsvHelper<>(Investor.class, pathInvestment, memberFieldsInv);
+        List<Loan> loans = new ArrayList<>();
+        List<Investor> investors = new ArrayList<>();
 
-        loans = loanCsvDao.getLoans(csvHelperLoan);
-        investors = investorCsvDao.getInvestors(csvHelperInvestor);
+        loans.add(mockLoan);
+        investors.add(fixedInvestor);
+        investors.add(trackerInvestor);
 
-        match = new Match(matchingRules, loans, investors);
-
+        match = new Match(matchingRulesMock, loans, investors);
     }
 
-    @AfterAll
-    static void afterAll()
-    {
+    @AfterEach
+    void afterEach(){
         System.setOut(originalOut);
     }
 
@@ -80,23 +59,26 @@ public class MatchTest
     }
 
     @Test
-    @DisplayName("System.out.println test to ensure correct setup")
-    void systemPrintOutTest()
-    {
-        System.out.println("Landbay Java Application");
-        assertEquals("Landbay Java Application\n", outContent.toString());
-    }
-
-    @Test
     @DisplayName("Should print to terminal a list of qualified loans")
     void startMatch()
     {
-//        match.sortProductTypesIntoLists(investors);
-//
-//        match.processLoan("FIXED", loans.get(0));
+
+        String expectedResult = "{\n" +
+                "  \"loanId\": 2,\n" +
+                "  \"product\": \"FIXED\",\n" +
+                "  \"loanAmount\": 99000,\n" +
+                "  \"completedDate\": \"02/01/2015\",\n" +
+                "  \"amountUnfunded\": 0,\n" +
+                "  \"fundedStatus\": true,\n" +
+                "  \"term\": 10,\n" +
+                "  \"investors\": {\n" +
+                "    \"Ben\": 99000\n" +
+                "  }\n" +
+                "}\n";
 
         match.startMatch();
-        assertEquals("{Investor}\n", outContent.toString());
+        assertEquals(expectedResult, outContent.toString());
     }
+
 }
 
