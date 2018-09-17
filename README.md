@@ -119,17 +119,17 @@ time (assuming you process and release the object for the garbage collector imme
 ## Requirements
 
 Context
-Landbay is in the peer-to-peer business. As part of this, when a borrower applies for a mortgage and Landbay provides 
-an offer, Landbay needs to be able to guarantee that we have enough investment from our investors to fund the borrowers 
+ABC is in the peer-to-peer business. As part of this, when a borrower applies for a mortgage and ABC provides 
+an offer, ABC needs to be able to guarantee that we have enough investment from our investors to fund the borrowers 
 mortgage. In order to do this, we allow our lenders to request investments.
 
 #### You have been given two files:
 
 • investments.csv. In this file, you will find a number of requests that investors have made. For example, line 1 means 
 "Alice wants to invest £100 for up to 12 months in the FIXED product". Each line represents a separate request that was 
-placed on the Landbay platform.
+placed on the ABC platform.
 
-• loans.csv. In this file, you will find a number of loans that Landbay would like to find funds for. Initially no loan 
+• loans.csv. In this file, you will find a number of loans that ABC would like to find funds for. Initially no loan 
 has any investment against it. The amount field simply shows the amount the borrower wishes to borrow. We must match every 
 penny on this amount with investor funds.
 
@@ -147,7 +147,7 @@ penny on this amount with investor funds.
 • A valid "funded" loan must be fully funded from the investments.csv file. If a loan does not have all the funds 
 necessary, then it cannot qualify.
 
-• Partially funded loans are of no value to Landbay (we can't give our borrowers less money than they need to 
+• Partially funded loans are of no value to ABC (we can't give our borrowers less money than they need to 
 buy the property)
 
 • Over-funded loans are also not useful (we can't give our borrowers more money than they want as this means they will 
