@@ -7,7 +7,7 @@ object oriented design and put me outside of my comfort zone as I haven't create
 Java.
 
 In solving this challenge and producing the code in this repository I sifted pages after pages of StackOverflow questions, 
-blogs and articles. I have included below example of few of these useful articles.
+blogs and articles. I have included below examples of few of these useful articles.
 
 ## Test Driven Development
 
