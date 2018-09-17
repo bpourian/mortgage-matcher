@@ -3,6 +3,7 @@ package com.landbay.dao;
 import com.landbay.model.Investor;
 import com.landbay.util.CsvHelper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -12,10 +13,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+@DisplayName("Testing the Investor DAO for CSV files")
 class InvestorCsvDaoImplTest {
 
     @Mock
@@ -32,26 +33,21 @@ class InvestorCsvDaoImplTest {
     }
 
     @Test
+    @DisplayName("Returns a list of investors from a given CSV file")
     void getInvestors()
     {
-        Investor inv = new Investor("Jeff", 100, "FIXED", 12);
-        List<Investor> investors = new ArrayList<Investor>();
-        investors.add(inv);
+        setUpCsvMockInstance();
+        List<Investor> actualInvestorList = investorCsvDao.getInvestors(csvHelperMock);
+        String actualInvestorName = actualInvestorList.get(0).getInvestor();
 
-        Iterator<Investor> investorIterator = investors.iterator();
+        assertEquals("Jeff" ,actualInvestorName);
+    }
 
-        when(csvHelperMock.csvToBeanIterator()).thenReturn(investorIterator);
-
-        List<Investor> actual = new ArrayList<Investor>();
-        actual.add(investorCsvDao.getInvestors(csvHelperMock).get(0));
-        System.out.println(actual.get(0));
-        System.out.println(investors.get(0));
-
-
-        Investor act = actual.get(0);
-        Investor exp = investors.get(0);
-//        assertEquals(exp,act);
-        assertThat(actual, is(investors));
-//        assertThat(actual, IsIterableContainingInAnyOrder.containsInAnyOrder(test));
+    private void setUpCsvMockInstance(){
+        Investor investor = new Investor("Jeff", 100, "FIXED", 12);
+        List<Investor> csvMockList = new ArrayList<Investor>();
+        csvMockList.add(investor);
+        Iterator<Investor> csvHelperMockReturn = csvMockList.iterator();
+        when(csvHelperMock.csvToBeanIterator()).thenReturn(csvHelperMockReturn);
     }
 }

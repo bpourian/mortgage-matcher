@@ -20,12 +20,6 @@ public class CsvHelper<T> {
     private Reader reader;
     private String[] memberFieldsToBind;
 
-    /**
-     * This constructor starts the read from file process and allows you specify a class type
-     * @param type
-     * @param filePath
-     * @param memberFieldsToBind
-     */
     public CsvHelper(Class type, String filePath, String... memberFieldsToBind)
     {
         this.myClass = type;
@@ -33,11 +27,6 @@ public class CsvHelper<T> {
         this.memberFieldsToBind = memberFieldsToBind;
     }
 
-    /**
-     * This method returns an Iterator list of defined objects
-     * that have been set in the constructor
-     * @return
-     */
     public Iterator<T> csvToBeanIterator()
     {
         // Using below strategy to decouple
@@ -57,9 +46,7 @@ public class CsvHelper<T> {
                 .withIgnoreLeadingWhiteSpace(true)
                 .build();
 
-        Iterator<T> classIterator = csvToBean.iterator();
-
-        return classIterator;
+        return csvToBean.iterator();
     }
 
     private Reader readFile(String CSV_FILE_PATH) {

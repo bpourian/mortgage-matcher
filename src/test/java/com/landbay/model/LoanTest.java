@@ -8,9 +8,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * Unit test for Loan class
- */
 public class LoanTest {
 
     private Loan loan;
@@ -18,7 +15,6 @@ public class LoanTest {
     @BeforeEach
     void setUp()
     {
-        // test data
         int loanId = 2;
         int loanAmount = 20000;
         String product = "TRACKER";
