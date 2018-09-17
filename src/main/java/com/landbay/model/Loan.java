@@ -32,8 +32,6 @@ public class Loan {
         this.completedDate = completedDate;
     }
 
-    // public getters
-
     public int getLoanId() {
         return loanId;
     }
@@ -53,8 +51,6 @@ public class Loan {
     public String getCompletedDate() {
         return completedDate;
     }
-
-    // public setters
 
     public void setLoanId(int loanId) {
         this.loanId = loanId;

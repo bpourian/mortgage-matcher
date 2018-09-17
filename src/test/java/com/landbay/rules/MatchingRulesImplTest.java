@@ -1,6 +1,7 @@
 package com.landbay.rules;
 
 import com.landbay.model.Investor;
+import com.landbay.model.Loan;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -16,25 +17,41 @@ class MatchingRulesImplTest {
 
     private MatchingRulesImpl matchingRules;
 
-    private Investor investor;
-
     @BeforeEach
     void beforeEach() {
+        matchingRules = new MatchingRulesImpl();
     }
 
     @Test
-    @DisplayName("Sorts investors into FIXED and TRACKER lists")
-    void sortProductTypesIntoLists() {
+    @DisplayName("Sort loans into order of oldest date first")
+    void sortLoansByOldestFirst() {
+        List<Loan> loans = matchingRules.sortLoansByOldestFirst(mockUnsortedLoans());
+
+        int actualLoanId = loans.get(0).getLoanId();
+        int expectedLoanId = 3;
+        assertEquals(expectedLoanId, actualLoanId);
     }
 
     @Test
-    @DisplayName("Filters terms of investors so they exceed loan term")
+    @DisplayName("Filter terms of investors so they exceed loan term")
     void investorTermFilter() {
+        Loan loan = new Loan(7, 1000, "FIXED", 12, "09/01/2015");
+        List <Investor> investors = matchingRules.investorTermFilter(loan, mockInvestorList());
+        List<String> actualInvestors = new ArrayList<>();
+
+        List<String> expectedInvestors = new ArrayList<>();
+        expectedInvestors.add("James");
+        expectedInvestors.add("Jenny");
+
+        for (Investor inv : investors)
+                actualInvestors.add(inv.getInvestor());
+
+        assertEquals(expectedInvestors, actualInvestors);
     }
 
     @Nested
     @DisplayName("Sort investors into FIXED and TRACKER lists")
-    class sortLoansByOldestFirst
+    class sortProductTypesIntoLists
     {
         @BeforeEach
         void beforeEach() {
@@ -71,7 +88,7 @@ class MatchingRulesImplTest {
         }
     }
 
-    List<Investor> mockInvestorList()
+    private List<Investor> mockInvestorList()
     {
         Investor investor1 = new Investor("James", 100000, "FIXED", 18);
         Investor investor2 = new Investor("Jenny", 300000, "TRACKER", 20);
@@ -81,5 +98,18 @@ class MatchingRulesImplTest {
         investors.add(investor2);
         investors.add(investor3);
         return investors;
+    }
+
+    private List<Loan> mockUnsortedLoans()
+    {
+        Loan loan1 = new Loan(7, 1000, "FIXED", 12, "09/01/2015");
+        Loan loan2 = new Loan(5, 1000, "FIXED", 12, "04/01/2015");
+        Loan loan3 = new Loan(3, 1000, "FIXED", 12, "01/01/2015");
+
+        List<Loan> loans = new ArrayList<>();
+        loans.add(loan1);
+        loans.add(loan2);
+        loans.add(loan3);
+        return loans;
     }
 }

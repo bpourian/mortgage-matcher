@@ -21,33 +21,15 @@ public class MatchingRulesImpl implements MatchingRules {
         this.fixedInvestors = new ArrayList<>();
     }
 
-    // public getter and setters methods
-
     public List<Investor> getTrackerInvestors()
     {
         return this.trackerInvestors;
     }
-
-
     public List<Investor> getFixedInvestors()
     {
         return this.fixedInvestors;
     }
 
-    public void setTrackerInvestors(List<Investor> trackerInvestors) {
-        this.trackerInvestors = trackerInvestors;
-    }
-
-    public void setFixedInvestors(List<Investor> fixedInvestors) {
-        this.fixedInvestors = fixedInvestors;
-    }
-
-    // interface methods implemented
-    /**
-     * Returns a sorted list of loans in date order - oldest first
-     * @param unsortedList
-     * @return
-     */
     @Override
     public List<Loan> sortLoansByOldestFirst(List<Loan> unsortedList)
     {
@@ -56,10 +38,6 @@ public class MatchingRulesImpl implements MatchingRules {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Sorts Fixed and Tracker investment requests from the InvestorDao
-     * @param unsortedList
-     */
     @Override
     public void sortProductTypesIntoLists(List<Investor> unsortedList)
     {
@@ -78,12 +56,6 @@ public class MatchingRulesImpl implements MatchingRules {
            }
     }
 
-    /**
-     * Returns list of investment requests that exceed the loan term
-     * @param loan
-     * @param investors
-     * @return
-     */
     @Override
     public List<Investor> investorTermFilter(Loan loan, List<Investor> investors)
     {
