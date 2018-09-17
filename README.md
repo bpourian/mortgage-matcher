@@ -1,11 +1,5 @@
 # Mortgage Matcher
 
-## In brief 
-
-The aim of this application is to take in two sources of data that contain information which correlate with the defined models `Investor` and `Loan`.
-In designing this app I have considered the object oriented developments main principals as per below:
-
-
 ## My thoughts 
 
 I have really enjoyed working on this challenge. This exercise allowed me to demonstrate my understanding of
@@ -31,6 +25,11 @@ an eye on progress and improvements to this feature I used the github issues tab
 
 You will find that I have left some open to revisit in the future. I would say namely the parts which need refactoring and 
 enhancing are around the mocking and stubbing out of some classes in my unit tests.
+
+## In brief 
+
+The aim of this application is to take in two sources of data that contain information which correlate with the defined models `Investor` and `Loan`.
+In designing this app I have considered the object oriented developments main principals as per below:
 
 
 ##### Encapsulation
