@@ -23,12 +23,12 @@ class InvestorCsvDaoImplTest {
     private CsvHelper csvHelperMock;
 
     @InjectMocks
-    private InvestorCsvDaoImpl investorCsvDao;
+    private InvestorDaoImpl investorCsvDao;
 
     @BeforeEach
     void setUp()
     {
-        investorCsvDao = new InvestorCsvDaoImpl();
+        investorCsvDao = new InvestorDaoImpl();
         MockitoAnnotations.initMocks(this);
     }
 
@@ -37,7 +37,7 @@ class InvestorCsvDaoImplTest {
     void getInvestors()
     {
         setUpCsvMockInstance();
-        List<Investor> actualInvestorList = investorCsvDao.getInvestors(csvHelperMock);
+        List<Investor> actualInvestorList = investorCsvDao.listData(csvHelperMock.csvToBeanIterator());
         String actualInvestorName = actualInvestorList.get(0).getInvestor();
 
         assertEquals("Jeff" ,actualInvestorName);

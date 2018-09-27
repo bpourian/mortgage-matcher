@@ -1,7 +1,7 @@
 package com.landbay;
 
-import com.landbay.dao.InvestorCsvDaoImpl;
-import com.landbay.dao.LoanCsvDaoImpl;
+import com.landbay.dao.InvestorDaoImpl;
+import com.landbay.dao.LoanDaoImpl;
 import com.landbay.model.Investor;
 import com.landbay.model.Loan;
 import com.landbay.rules.MatchingRulesImpl;
@@ -31,10 +31,10 @@ public class Main
         CsvHelper<Investor> csvHelperInvestor = new CsvHelper<>(Investor.class, pathInvestment, memberFieldsInv);
 
         /* Pass the value returned from csv helper to relevant DAO implementation */
-        LoanCsvDaoImpl loanCsvDao = new LoanCsvDaoImpl();
-        InvestorCsvDaoImpl investorCsvDao = new InvestorCsvDaoImpl();
-        List<Loan> loans = loanCsvDao.getLoans(csvHelperLoan);
-        List<Investor> investors = investorCsvDao.getInvestors(csvHelperInvestor);
+        LoanDaoImpl loanCsvDao = new LoanDaoImpl();
+        InvestorDaoImpl investorCsvDao = new InvestorDaoImpl();
+        List<Loan> loans = loanCsvDao.listData(csvHelperLoan.csvToBeanIterator());
+        List<Investor> investors = investorCsvDao.listData(csvHelperInvestor.csvToBeanIterator());
 
         /* Pass a new instance of matching rules to an instance of Match */
         MatchingRulesImpl matchingRules = new MatchingRulesImpl();

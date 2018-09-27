@@ -1,18 +1,16 @@
 package com.landbay.dao;
 
 import com.landbay.model.Investor;
-import com.landbay.util.CsvHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class InvestorCsvDaoImpl implements InvestorDao
-{
+public class InvestorDaoImpl implements Dao<Investor> {
+
     @Override
-    public List<Investor> getInvestors(CsvHelper csvHelper)
-    {
-        Iterator<Investor> investorIterator = csvHelper.csvToBeanIterator();
+    public List<Investor> listData(Iterator<Investor> investorIterator) {
+
         List<Investor> list = new ArrayList<>();
         while (investorIterator.hasNext())
         {
