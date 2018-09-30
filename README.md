@@ -144,6 +144,7 @@ penny on this amount with investor funds.
 
 
 ##### Business Rules
+
 • A valid "funded" loan must be fully funded from the investments.csv file. If a loan does not have all the funds 
 necessary, then it cannot qualify.
 
@@ -160,19 +161,4 @@ have to eventually pay more interest).
 • The term of the investment must be greater than the term of the loan (i.e. the investor needs to
 be willing to put money in for longer than the loan needs it for).
 
-#### Technical requirements
-
-Bonus points for
-
-• The input can be hard coded
-
-• Everything can be done in memory. There is no need to write the result to a database, a file, etc.
-
-• This is an opportunity to demonstrate your understanding of OOP
-
-• If it's easy to extend the matching rules (the rules you run to match an investment to a loan)
-
 • Produce a JSON representation (using some library) of the result when you print it out
-
-• Read in the CSV files from disk. We sometimes use [opencsv.sourceforge.net](http://opencsv.sourceforge.net/) internally but
-you can use whatever means you find easiest
