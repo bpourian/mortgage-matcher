@@ -34,7 +34,7 @@ class InvestorCsvDaoImplTest {
 
     @Test
     @DisplayName("Returns a list of investors from a given CSV file")
-    void getInvestors()
+    void listData()
     {
         setUpCsvMockInstance();
         List<Investor> actualInvestorList = investorCsvDao.listData(csvHelperMock.csvToBeanIterator());

@@ -33,7 +33,7 @@ class LoanCsvDaoImplTest {
 
     @Test
     @DisplayName("Returns a list of loans from a given CSV file")
-    void listLoan() {
+    void listData() {
         setUpCsvMockInstance();
         List<Loan> actualInvestorList = loanCsvDao.listData(csvHelperMock.csvToBeanIterator());
         int actualLoanId = actualInvestorList.get(0).getLoanId();
